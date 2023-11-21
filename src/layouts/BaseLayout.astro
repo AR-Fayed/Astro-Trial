@@ -1,28 +1,11 @@
 ---
+import Navigation from "../components/Navigation.astro";
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import "../styles/global.css";
-
-const pageTitle = "about me";
-
-const identity = {
-  firstName: "Sarah",
-  country: "Canada",
-  occupation: "Technical Writer",
-  hobbies: ["photography", "birdwatching", "baseball"],
-};
-const happy = true;
-const finished = true;
-const goal = 3;
-const skills = ["good", "ok", "thumbs down"];
-const color = "red";
-const font = "700";
+const { pageTitle } = Astro.props;
 ---
 
 <Layout title={pageTitle}>
-  <Header />
   <main>
     <svg
       class="astro-a"
@@ -52,46 +35,15 @@ const font = "700";
         </linearGradient>
       </defs>
     </svg>
-    <h1><span class="text-gradient">{pageTitle}</span></h1>
-    <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>{identity.hobbies[2]}</strong> Tweak the "Welcome to Astro"
-      message above.
-    </p>
-    <ul role="list" class="link-card-grid">
-      <Card
-        href="#"
-        title="ezayak ya rayes"
-        body="law faker enak kda bete3mel 7aga teb2a donkey!"
-      />
-    </ul>
+    <Navigation />
+    <h1>{pageTitle}</h1>
 
-    {happy && <p>I am happy to be learning Astro!</p>}
-
-    {finished && <p>I finished this tutorial!</p>}
-
-    {
-      goal === 3 ? (
-        <p>My goal is to finish in 3 days.</p>
-      ) : (
-        <p>My goal is not 3 days.</p>
-      )
-    }
-
-    <p>my skills are:</p>
-
-    {skills.map((skill) => <li class="skills">{skill}</li>)}
-
+    <slot />
     <Footer />
-
-    <script>
-      import "../scripts/main.ts";
-    </script>
   </main>
 </Layout>
 
-<style define:vars={{ color, font }}>
+<style>
   main {
     margin: auto;
     padding: 1rem;
@@ -101,12 +53,6 @@ const font = "700";
     font-size: 20px;
     line-height: 1.6;
   }
-
-  .skills {
-    color: var(--color);
-    font-weight: var(--font);
-  }
-
   .astro-a {
     position: absolute;
     top: -32px;
